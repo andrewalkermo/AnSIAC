@@ -98,6 +98,7 @@ def verify_grades():
       token = file.read()
       last_grades = jwt.decode(token, SECRET, algorithms=['HS256'])['grades']
   except:
+    print('No token found')
     pass
 
   for semester_class, last_grade in zip(semester_classes, last_grades):
