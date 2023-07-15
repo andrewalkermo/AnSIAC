@@ -5,3 +5,4 @@ grades.json
 __pycache__
 .vscode
 .idea
+token.txt

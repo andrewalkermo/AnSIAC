@@ -14,4 +14,4 @@ COPY . /app
 
 ENV PYTHONPATH="$PYTHONPATH:/app"
 
-ENTRYPOINT [ "poetry", "run", "python3", "main.py" ]
+CMD [ "poetry", "run", "python3", "main.py" ]

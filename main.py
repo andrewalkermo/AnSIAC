@@ -1,6 +1,6 @@
 from datetime import datetime
 import requests
-import json
+import jwt
 from bs4 import BeautifulSoup
 
 from config import settings
@@ -9,7 +9,7 @@ USERNAME = settings.get('siac.username')
 PASSWORD = settings.get('siac.password')
 BOT_TOKEN = settings.get('telegram.bot_token')
 CHAT_ID = settings.get('telegram.chat_id')
-
+SECRET = settings.get('jwt.secret')
 def login() -> requests.Response:
 
   headers = {
@@ -98,22 +98,25 @@ def get_classes():
 def verify_grades() -> bool:
   semester_classes = get_classes()
   last_grades = []
-  
+
   try:
-    with open('grades.json', 'r') as file:
-      last_grades = json.load(file)
+    with open('token.txt', 'r') as file:
+      token = file.read()
+      last_grades = jwt.decode(token, SECRET, algorithms=['HS256'])['grades']
   except:
      pass
 
   for semester_class, last_grade in zip(semester_classes, last_grades):
     if semester_class['grade'] != '--':
       print(f"{semester_class['name']} - {semester_class['grade']} - {semester_class['result']}")
-      if semester_class['grade'] == last_grade['grade']:
+      if semester_class['grade'] != last_grade['grade']:
         print('New grade found!')
         send_telegram_message(f"Nova nota: {semester_class['name']}: {semester_class['grade']} - {semester_class['result']}")
-  
-  with open('grades.json', 'w') as file:
-    json.dump(semester_classes, file, indent=2)
+
+  token = jwt.encode({'grades': semester_classes}, SECRET, algorithm='HS256')
+
+  with open('token.txt', 'w') as file:
+    file.write(token)
 
 def send_telegram_message(message):
     base_url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
