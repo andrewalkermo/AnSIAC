@@ -14,15 +14,15 @@ jobs:
         run: docker build --tag ansiac .
       - name: run container
         env:
-          DYNACONF_SIAC_USERNAME: ${{ secrets.DYNACONF_SIAC_USERNAME }}
-          DYNACONF_SIAC_PASSWORD: ${{ secrets.DYNACONF_SIAC_PASSWORD }}
-          DYNACONF_TELEGRAM_BOT_TOKEN: ${{ secrets.DYNACONF_TELEGRAM_BOT_TOKEN }}
-          DYNACONF_TELEGRAM_CHAT_ID: ${{ secrets.DYNACONF_TELEGRAM_CHAT_ID }}
+          DYNACONF_SIAC__USERNAME: ${{ secrets.DYNACONF_SIAC__USERNAME }}
+          DYNACONF_SIAC__PASSWORD: ${{ secrets.DYNACONF_SIAC__PASSWORD }}
+          DYNACONF_TELEGRAM__BOT_TOKEN: ${{ secrets.DYNACONF_TELEGRAM__BOT_TOKEN }}
+          DYNACONF_TELEGRAM__CHAT_ID: ${{ secrets.DYNACONF_TELEGRAM__CHAT_ID }}
         run: |
           docker run \
             --volume $(pwd):/app \
-            --env DYNACONF_SIAC_USERNAME \
-            --env DYNACONF_SIAC_PASSWORD \
-            --env DYNACONF_TELEGRAM_BOT_TOKEN \
-            --env DYNACONF_TELEGRAM_CHAT_ID \
+            --env DYNACONF_SIAC__USERNAME \
+            --env DYNACONF_SIAC__PASSWORD \
+            --env DYNACONF_TELEGRAM__BOT_TOKEN \
+            --env DYNACONF_TELEGRAM__CHAT_ID \
             ansiac
