@@ -9,6 +9,8 @@ Se tiver alguma nota nova desde a última verificação ele manda uma mensagem n
 
 ## Como usar
 ### Fork no GitHub
+O GitHub Actions vai executar o script a cada 5 minutos. ou manualmente clicando em "Run workflow" na página do Actions.
+
 1. Clique no botão "Fork" no canto superior direito da página.
 2. Clique no botão "Settings" no canto superior direito da página.
 3. Clique em "Secrets" no menu lateral esquerdo.
