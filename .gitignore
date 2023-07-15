@@ -1,0 +1,7 @@
+
+# Ignore dynaconf secret files
+.secrets.*
+grades.json
+__pycache__
+.vscode
+.idea

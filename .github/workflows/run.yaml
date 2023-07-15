@@ -1,0 +1,16 @@
+name: verifica_notas
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  push:
+
+jobs:
+  verifica_notas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build container
+        run: docker build --tag ansiac .
+      - name: run container
+        run: docker run --rm -v $(pwd):/app ansiac

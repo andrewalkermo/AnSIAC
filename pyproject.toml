@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "ansiac"
+version = "0.1.0"
+description = "Verifica se já botarma minha nota no SIAC"
+authors = ["André Walker <andre.walkermo@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+beautifulsoup4 = "^4.12.2"
+dynaconf = "^3.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
