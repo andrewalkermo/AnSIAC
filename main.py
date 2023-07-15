@@ -10,8 +10,6 @@ PASSWORD = settings.get('siac.password')
 BOT_TOKEN = settings.get('telegram.bot_token')
 CHAT_ID = settings.get('telegram.chat_id')
 
-print(USERNAME, PASSWORD, BOT_TOKEN, CHAT_ID)
-
 def login() -> requests.Response:
 
   headers = {
@@ -47,8 +45,7 @@ def login() -> requests.Response:
   if response.status_code == 200:
     return response
   else:
-    print('Login failed:', response.status_code)
-    exit()
+    raise Exception('Login failed')
 
 def get_classes():
   response = login()
@@ -78,8 +75,7 @@ def get_classes():
                     break
       
       if not found:
-        print('Semester not found')
-        exit()
+        raise Exception('Semester not found')
 
       # Iterate through the td elements to find the one containing the desired semester
       semester_classes = []
@@ -114,7 +110,7 @@ def verify_grades() -> bool:
       print(f"{semester_class['name']} - {semester_class['grade']} - {semester_class['result']}")
       if semester_class['grade'] == last_grade['grade']:
         print('New grade found!')
-        send_telegram_message(f"Nova nota encontrada em {semester_class['name']}: {semester_class['grade']} - {semester_class['result']}")
+        send_telegram_message(f"Nova nota: {semester_class['name']}: {semester_class['grade']} - {semester_class['result']}")
   
   with open('grades.json', 'w') as file:
     json.dump(semester_classes, file, indent=2)
