@@ -109,7 +109,7 @@ def verify_grades():
   for semester_class, last_grade in zip(semester_classes, last_grades):
     if semester_class['grade'] != '--':
       print(f"{semester_class['name']} - {semester_class['grade']} - {semester_class['result']}")
-      if semester_class['grade'] == last_grade['grade']:
+      if semester_class['grade'] != last_grade['grade']:
         print('New grade found!')
         send_telegram_message(f"Nova nota: {semester_class['name']}: {semester_class['grade']} - {semester_class['result']}")
 
