@@ -2,7 +2,7 @@ name: verifica_notas
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '*/5 * * * *'
   push:
   workflow_dispatch:
 
