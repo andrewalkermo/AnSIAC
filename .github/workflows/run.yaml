@@ -10,6 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Cache grades
+        id: cache-grades
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-grades
+        with:
+            path: token.txt
+            key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/token.txt') }}
+            restore-keys: |
+              ${{ runner.os }}-build-${{ env.cache-name }}-
       - name: Build container
         run: docker build --tag ansiac .
       - name: run container
