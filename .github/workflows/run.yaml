@@ -18,8 +18,8 @@ jobs:
         env:
           cache-name: cache-grades
         with:
-            path: token.txt
-            key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/token.txt') }}
+            path: grades.json
+            key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/grades.json') }}
             restore-keys: |
               ${{ runner.os }}-build-${{ env.cache-name }}-
       - name: Build container
