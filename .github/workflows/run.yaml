@@ -37,5 +37,6 @@ jobs:
             --env DYNACONF_TELEGRAM__CHAT_ID \
             ansiac
       - name: try force cache update
-        run: STATE_CACHE_KEY="${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('grades.json') }}"
-    echo "STATE_CACHE_KEY=${STATE_CACHE_KEY}" >> $GITHUB_ENV
+        run: |
+          STATE_CACHE_KEY="${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('grades.json') }}"|
+          echo "STATE_CACHE_KEY=${STATE_CACHE_KEY}" >> $GITHUB_ENV
