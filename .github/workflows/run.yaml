@@ -15,11 +15,9 @@ jobs:
       - name: Cache grades
         id: cache-grades
         uses: actions/cache@v3
-        env:
-          cache-name: cache-grades
         with:
             path: grades.json
-            key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('grades.json') }}
+            key: ${{ runner.os }}-build-cache-grades
       - name: Build container
         run: docker build --tag ansiac .
       - name: run container
@@ -38,5 +36,5 @@ jobs:
             ansiac
       - name: try force cache update
         run: |
-          STATE_CACHE_KEY="${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('grades.json') }}"|
+          STATE_CACHE_KEY="${{ runner.os }}-build-cache-grades"
           echo "STATE_CACHE_KEY=${STATE_CACHE_KEY}" >> $GITHUB_ENV
