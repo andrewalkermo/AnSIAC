@@ -19,9 +19,7 @@ jobs:
           cache-name: cache-grades
         with:
             path: grades.json
-            key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/grades.json') }}
-            restore-keys: |
-              ${{ runner.os }}-build-${{ env.cache-name }}-
+            key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('grades.json') }}
       - name: Build container
         run: docker build --tag ansiac .
       - name: run container
@@ -38,3 +36,7 @@ jobs:
             --env DYNACONF_TELEGRAM__BOT_TOKEN \
             --env DYNACONF_TELEGRAM__CHAT_ID \
             ansiac
+      - name: try force cache update
+        run: |
+          STATE_CACHE_KEY="${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('grades.json') }}"|
+          echo "STATE_CACHE_KEY=${STATE_CACHE_KEY}" >> $GITHUB_ENV
