@@ -67,7 +67,7 @@ def get_classes():
         td_elements = tr.find_all('td')
         for td in td_elements:
           if td.b and td.b.text.strip() == semester:
-            tr_elements = tr_elements[index:len(tr_elements)-2]
+            tr_elements = tr_elements[index:len(tr_elements)-1]
             found = True
             break
   if not found:
@@ -102,7 +102,7 @@ def verify_grades():
 
   for semester_class, last_grade in zip(semester_classes, last_grades):
     if semester_class['grade'] != '--':
-      # print(f"{semester_class['name']} - {semester_class['grade']} - {semester_class['result']}")
+      print(f"{semester_class['name']} - {semester_class['grade']} - {semester_class['result']}")
       if semester_class['grade'] != last_grade['grade']:
         print('New grade found!')
         send_telegram_message(f"Nova nota: {semester_class['name']}: {semester_class['grade']} - {semester_class['result']}")
