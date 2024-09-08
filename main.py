@@ -50,7 +50,7 @@ def get_classes():
 
   coef_url = 'https://siac.ufba.br/SiacWWW/ConsultarComponentesCurricularesCursados.do'
   response = requests.get(coef_url, cookies=response.cookies)
-  semester = get_semester()
+  semester = '2024.1'
   semester_classes = []
 
   if response.status_code != 200:
