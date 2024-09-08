@@ -9,6 +9,7 @@ USERNAME = settings.get('siac.username')
 PASSWORD = settings.get('siac.password')
 BOT_TOKEN = settings.get('telegram.bot_token')
 CHAT_ID = settings.get('telegram.chat_id')
+
 def login() -> requests.Response:
 
   headers = {
@@ -50,7 +51,7 @@ def get_classes():
 
   coef_url = 'https://siac.ufba.br/SiacWWW/ConsultarComponentesCurricularesCursados.do'
   response = requests.get(coef_url, cookies=response.cookies)
-  semester = '2024.1'
+  semester = settings.get('siac.semestre') or get_semester()
   semester_classes = []
 
   if response.status_code != 200:

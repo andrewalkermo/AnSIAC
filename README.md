@@ -22,6 +22,7 @@ O GitHub Actions vai executar o script a cada 5 minutos. ou manualmente clicando
 5. Adicione as seguintes variaveis:
     - DYNACONF_SIAC__USERNAME: Seu usuário do SIAC.
     - DYNACONF_SIAC__PASSWORD: Sua senha do SIAC.
+    - DYNACONF_SIAC__SEMESTRE: O semestre que você quer verificar.
     - DYNACONF_TELEGRAM__BOT_TOKEN: O token do seu bot do Telegram.
     - DYNACONF_TELEGRAM__CHAT_ID: Seu CHAT ID da conversa do Telegram
 6. Habilitar o GitHub Actions clicando em "Settings" > "Actions" > "General" > "Allow all actions" > "Save".
